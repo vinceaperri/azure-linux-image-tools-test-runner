@@ -230,6 +230,11 @@ patch_ukify() {
         return
     fi
 
+    if [[ "$UKIFY_PATH" == "" ]]; then
+        log_error "ukify not found in PATH"
+        return
+    fi
+
     # Skip patching if the patch is already applied.
     if sudo patch --dry-run -R "$UKIFY_PATH" "$patch_file" &>/dev/null; then
         log_info "ukify patch already applied, skipping"
